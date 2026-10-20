@@ -1,45 +1,31 @@
-cool, waiting on pcb to arrive
+# S'mores Pad
 
-[bom](bom.csv)
+A s'mores themed macropad with 4 keys and a 0.91" OLED, powered by a XIAO ESP32-C3. The marshmallow keycaps (took apart from those popular toasted bread fidget keychains) and chocolate and graham-cracker inspired 3D printed make it a super cute accessory for fall. The XIAO's built-in USB-C is exposed on the side of the board for power and data.
 
-Redesigning this to be s'mores themed
-
-new schem
-![schematic](/images/schematic4.png)
-
-pcb wired
-![pcb](/images/pcb1.png)
-
-
-# Macropad ᶻ 𝗓 𐰁 .ᐟ
-
-A simple macropad with an OLED screen, 1 LED and 6 switches. Have a few different ideas on how I'll use it/firmware, some ideas: keyboard shortcuts for git commands, game controller, MIDI controller. Made using @Alex Ren's hackpad guide and Joe Scotto's keyboard guides.
+Full build logs are in [JOURNAL.md](JOURNAL.md), and the parts list is in [bom.csv](bom.csv).
 
 # Photos
 
-| Schematic                           | PCB                     | 3D Viewer             |
-| ----------------------------------- | ----------------------- | --------------------- |
-| ![Schematic](/images/schematic.png) | ![PCB](/images/pcb.png) | ![3D](/images/3d.png) |
+| Schematic                           | PCB                           | Silkscreen                           |
+| ----------------------------------- | ----------------------------- | ------------------------------------ |
+| ![Schematic](/images/schematic4.png) | ![PCB](/images/final_pcb.png) | ![Silkscreen](/images/new_silkscreen.png) |
+
+Board size: 45.87 x 57.85 mm
 
 # BOM (Components)
 
-| Item                   | Purpose           | Quantity   | Cost   | Source                                                                |
-| ---------------------- | ----------------- | ---------- | ------ | --------------------------------------------------------------------- |
-| D1                     | RGB LED           | 1 (MOQ 5)  | $0.43  | [LCSC C5149201](https://www.lcsc.com/product-detail/C5149201.html)    |
-| D2, D3, D4, D5, D6, D7 | Signal Diode      | 6 (MOQ 50) | $1.09  | [LCSC C258182](https://www.lcsc.com/product-detail/C258182.html)      |
-| J1                     | OLED 128x32       | 1          | $2.24  | [LCSC C5248081](https://www.lcsc.com/product-detail/C5248081.html)    |
-| U1                     | Seeed XIAO RP2040 | 1          | $10.99 | [Amazon](https://www.amazon.com/gp/product/B0DRNSV5CS) (pre-soldered) |
+| Item     | Purpose                | Quantity | Source                                                                                               |
+| -------- | ---------------------- | -------- | ---------------------------------------------------------------------------------------------------- |
+| U1       | XIAO ESP32-C3 (MCU)    | 1        | Seeed Studio                                                                                         |
+| J1       | 0.91" 128x32 I2C OLED  | 1        | [Amazon](https://www.amazon.com/gp/product/B07PDFCVXL/ref=ox_sc_act_image_1?smid=A2ZDGCOOU4F0SF&psc=1) |
+| J1       | 1x4 female pin socket  | 1        | for mounting the OLED                                                                                |
+| R1, R2   | 4.7K I2C pull-ups (THT) | 2        | Arduino starter kit                                                                                  |
+| SW1-SW4  | Cherry MX switches     | 4        | Amazon                                                                                               |
+| Keycaps  | Marshmallow keycaps    | 4        | [Amazon](https://www.amazon.com/gp/product/B0GXKFVZB1/ref=ox_sc_act_title_2?smid=A2N8YDAE199BID&psc=1) |
+| PCB      | Mounting and wiring    | 1        | JLCPCB                                                                                               |
 
-# Assembly BOM
+# Firmware
 
-| Item                            | Purpose                             | Quantity   | Cost             | Source                                                                                                |
-| ------------------------------- | ----------------------------------- | ---------- | ---------------- | ----------------------------------------------------------------------------------------------------- |
-| PCB                             | functionality through MCU, mounting | 5          | $2, total $21.60 | JLCPCB                                                                                                |
-| XDA keycaps (black transparent) | cover switches                      | 20         | $11.99           | [Amazon](https://www.amazon.com/gp/product/B0CQ2YM5FM/ref=ox_sc_act_image_1?smid=A1T1IN9BGLZH2U&th=1) |
-| Solder Tip Cleaner              | clean flux                          | 1          | $9.99            | [Amazon](https://www.amazon.com/gp/product/B0CNVS7BFZ/ref=ox_sc_act_image_3?smid=A328EBN1BG6NU5&th=1) |
-| Solder Wire                     | to solder                           | 1          | $9.99            | [Amazon](https://www.amazon.com/gp/product/B0B6397413/ref=ox_sc_act_image_4?smid=A2T4V9F5BIUYS6&th=1) |
-| Mini Soldering Iron             | to solder                           | 1          | $39.99           | [Amazon](https://www.amazon.com/gp/product/B096X6SG13/ref=ox_sc_act_image_5?smid=AS24VHUSR1W5D&psc=1) |
-| S1, S2, S3, S4, S5, S6          | MX switches, brown                  | 6 (MOQ 20) | $8.99            | [Amazon](https://www.amazon.com/gp/product/B0888JHM58/ref=ox_sc_act_image_6?smid=A2U3R73MNHPWPS&th=1) |
-
-Macropad Total: $57.33
-with Soldering kit: $117.30
+Not written yet.
+<!--  A test sketch that confirms the OLED works is in [Code/TestingOLED.cpp](Code/TestingOLED.cpp). Switches have no external pull-ups, so they'll use `INPUT_PULLUP` and be read as active-low.
+ -->

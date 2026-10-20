@@ -5,7 +5,7 @@ description: "A s'mores themed macropad, with 4 keys and an OLED powered by a XI
 created_at: "2026-10-10"
 ---
 
-# October 7: Designign in Figma, determining component placement
+# October 7: Designign in Figma, determining component placement (3 hours)
 
 I was working on this macropad as my first hardware project for Stasis back in April I think, but the guide was really hard for me to follow, so I finished making the PCB and tried to submit the project without any CAD or firmware (not cooking).
 
@@ -42,7 +42,7 @@ Because adding an additional 4.7 Ω resistor won't damage or make it slower, I'l
 
 ![Added resistors](/images/added_resistors.png)
 
-# October 8-9: Adjusting the schematic
+# October 8-9: Adjusting the schematic (4 hours)
 + Where should you add pwr_flags vs 3.3V in kicad?
 Where power enters from an external source: I'll add to the VCC_3.3V pin on the C3.
 
@@ -86,7 +86,7 @@ Let's check again with Claude then PCB time. Oh I did the pull ups on the resist
 
 Ok wiring looks good.
 
-# October 10: Routing the PCB
+# October 10: Routing the PCB (6 hours 15 minutes)
 
 Maybe next time should've used a keyboard matrix?
 ![keyboard matrix](https://i.ytimg.com/vi/7LyziNdFlew/sddefault.jpg)
@@ -141,7 +141,7 @@ Shoot I was looking at the hackpad gallery and I kind of like the 1x 0.91" 128x3
 
 This is what the PCB looks like, I want to prototype it in real life and measure it on my own before ordering the PCB, so I'll get the parts before.
 
-# October 10: BOM time
+# October 10: BOM time (1 hour)
 
 Before I finalize the PCB, I want to have the physical components to play with so let's find them and order them.
 
@@ -152,7 +152,7 @@ Before I finalize the PCB, I want to have the physical components to play with s
 
 ![OLED on](/images/OLEDon.png.png) 
 
-# October 12: Some parts arrived
+# October 12: Some parts arrived (2 hours 30 minutes)
 
 The self healing cutting mat (I think that's what it's called, or a cutting mat? - the mat that everyone who works in hardware/engineering has, but I got it in pink of course) and the OLED both arrived in the mail today, so I'm just waiting on the keycaps. I'm going to try to prototype the macropad with what I have so far
 
@@ -170,11 +170,11 @@ C3: 20 x 15 mm
 
 Considered a new placement ![new placement](/images/new_placement.png) with the OLED in between the keycaps, but I'll stick to the OLED on top for now.
 
-# October 13: Silkscreen
+# October 13: Silkscreen (15 minutes)
 Started experimenting with silkscreens but kind of forgot how to do it (it's been a while).
 ![silkscreen](/images/new_silkscreen.png)
 
-# October 15: Parts Arrived
+# October 15: Parts Arrived (1 hour 35 minutes)
 I oriented the pieces how I liked and measured them
 ![new placement](/images/irl_parts.png)
 
