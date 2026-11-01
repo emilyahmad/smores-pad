@@ -11,13 +11,19 @@ I was working on this macropad as my first hardware project for Stasis back in A
 
 A few months ago I saw a really cute video of these girls with keychains that had keycaps of toasted bread, but they kind of looked like slightly burnt marshmallows to me, which gave me the idea to make a really cute s'mores themed macropad for end of summer/beginning of fall. I feel like the s'mores components will actually fit well into the design, as you can see below:
 
-![Little sketch](/images/prototype1.png)
+<p align="center">
+  <img src="images/prototype1.png" alt="Little sketch" width="50%"><br>
+  <sub><i>First sketch of the s'mores layout</i></sub>
+</p>
 
 I might just make the PCB from scratch for practice and I want to adjust it to a small 1x3 rather than current 2x3.
 
 Shoot I'm actually reconsidering this looking at my old design. It wouldn't be that hard to add a rotary or an OLED and that would make it much more useful. Back to the drawing board?
 
-![Another sketch](/images/prototype2.png)
+<p align="center">
+  <img src="images/prototype2.png" alt="Another sketch" width="50%"><br>
+  <sub><i>Second sketch with an OLED</i></sub>
+</p>
 
 I'll plan on a 2x2 with an OLED and USB-C for power, I guess it'll just have to be plugged in at all times when I use it?
 
@@ -31,16 +37,27 @@ Correspond to different power rails, we won't use VUSB (5V)
 + If you're not using pins on an MCU in a wiring diagram should you add a no connect flag?
 Yes
 
-![General placement](/images/smorespad_general_wiring.png)
+<p align="center">
+  <img src="images/smorespad_general_wiring.png" alt="General placement" width="50%"><br>
+  <sub><i>General component placement</i></sub>
+</p>
+
 I'm planning to wire it like this.
 
-![Schematic](/images/smorespad_schematic.png)
+<p align="center">
+  <img src="images/smorespad_schematic.png" alt="Schematic" width="50%"><br>
+  <sub><i>First schematic</i></sub>
+</p>
+
 This is what I've got, I'll double check with Claude. Claude mentioned:
 
 + Check if OLED contains I2C pull ups (Me & Claude çouldn't find it in the datasheet, Google says it's built in)
 Because adding an additional 4.7 Ω resistor won't damage or make it slower, I'll add it between the SDA and SCL pins connecting to the OLED.
 
-![Added resistors](/images/added_resistors.png)
+<p align="center">
+  <img src="images/added_resistors.png" alt="Added resistors" width="50%"><br>
+  <sub><i>Added pull-up resistors</i></sub>
+</p>
 
 # October 8-9: Adjusting the schematic (4 hours)
 + Where should you add pwr_flags vs 3.3V in kicad?
@@ -52,7 +69,10 @@ I might need to add a USB-Receptable part of the wiring like my devboard. I won'
 + Should I add a pwr_flag to the GND output of the C3 as well?
 Oh it's mainly for power outputs? Ohh I think I get it, you just put the power flag between the 3.3V or GND/whatever power symbol, just like you would with a resistor - on the net.
 
-![Pwr flag placed right](/images/place_pwr_flag.png)
+<p align="center">
+  <img src="images/place_pwr_flag.png" alt="Pwr flag placed right" width="50%"><br>
+  <sub><i>PWR_FLAG placed correctly</i></sub>
+</p>
 
 I'll probably do through-hole resistors because that's easier to solder. For assigning the footprint, I'll expand the Resistor_THT and choose based on size and power rating. For a 4.7K resistor, [this axial](https://www.digikey.com/en/products/detail/stackpole-electronics-inc/CF14JT4K70/1741428?gclsrc=aw.ds&gad_source=4&gad_campaignid=20682878391&gbraid=0AAAAADrbLlhHagyj9VcMYXw5Jg6t3uN1_&gclid=CjwKCAjwoaLWBhAWEiwAnyitu0q7ZIoBEf24n7WvusGYdJZPNJ8Uxk2ilCPZ5ONNjpV8P_V0X50U-RoCQjoQAvD_BwE) is 0.25W and 0.091" Dia x 0.236" L (2.30mm x 6.00mm). If the hole diameter must be 0.1 mm to 0.3 mm larger than the resistor lead diameter, I need a footprint that's around 2.4 - 2.6 mm.
 
@@ -68,42 +88,69 @@ Shell (body) length: 6mm
 Max body diameter: 2.5mm
 
 So I'll look for a footprint similar to L6mm_D2.5mm
-![Resistor visual](/images/resistor_visual.png)
+
+<p align="center">
+  <img src="images/resistor_visual.png" alt="Resistor visual" width="50%"><br>
+  <sub><i>Resistor visual</i></sub>
+</p>
+
 and place it vertically to better fit the board. Next time I might just surface mount & PCBA it. When it arrives I have to mesaure the body and make sure its body is within .5 mm and choose Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P2.54mm_Vertical
 
-![Resistor visual](/images/footprints_assigned.png)
+<p align="center">
+  <img src="images/footprints_assigned.png" alt="Resistor visual" width="50%"><br>
+  <sub><i>Footprints assigned</i></sub>
+</p>
 
 + Switches have no external pull-up so use INPUT_PULLUP and read them as active-low
 Figure this out when the parts arrive/designing firmware.
 
 Let's gooo - no more errors. I was having a "current configuration does not include footprint library" error but I just re-assigned the footprint and it worked. Here's the wiring:
 
-![Schematic 2](/images/smorespad_schematic2.png)
+<p align="center">
+  <img src="images/smorespad_schematic2.png" alt="Schematic 2" width="50%"><br>
+  <sub><i>Schematic v2</i></sub>
+</p>
 
 Let's check again with Claude then PCB time. Oh I did the pull ups on the resistors wrong. I'm going to re-orgnize the whole schematic based on the components and use labels for the digital pins. SDA and SCL should be bidirectional shaped labels, MCU digital pins are input shaped and those coming out of the other components are outputs.
 
-![Schematic 3](/images/smorespad_schematic3.png)
+<p align="center">
+  <img src="images/smorespad_schematic3.png" alt="Schematic 3" width="50%"><br>
+  <sub><i>Schematic v3</i></sub>
+</p>
 
 Ok wiring looks good.
 
-# October 10: Routing the PCB (6 hours 15 minutes)
+# October 10: Routing the PCB (6 hours 15m)
 
 Maybe next time should've used a keyboard matrix?
-![keyboard matrix](https://i.ytimg.com/vi/7LyziNdFlew/sddefault.jpg)
+
+<p align="center">
+  <img src="https://i.ytimg.com/vi/7LyziNdFlew/sddefault.jpg" alt="keyboard matrix" width="50%"><br>
+  <sub><i>Keyboard matrix example</i></sub>
+</p>
 
 Placing the switches/keys is so frustrating. I saw a youtube comment saying to use a plugin so I might just use that. I'm trying to do the grid spacing, setting a grid origin point and moving with reference but it's not working (this happened last time too, a few months ago and I wasn't able to figure it out)
 
 New plan because the OLED is lowkey huge: put the C3 behind the OLED so the USB-C still sticks out, but the new design will look more like this:
 
-![New placement](/images/general_placement2.png)
+<p align="center">
+  <img src="images/general_placement2.png" alt="New placement" width="50%"><br>
+  <sub><i>New placement with the C3 behind the OLED</i></sub>
+</p>
 
 I'm planning to add ~ 1.5mm spacing between each component. Never mind, that looks huge in the 3D viewer. Oh but that's the indivudal switches, there's going to need to be space for the keycaps. I'll just keep them bordering each other, so no overlap.
 
-![PCB switch placement](/images/![New placement](/images/general_placement2.png).png)
+<p align="center">
+  <img src="images/pcb_switch_placement.png" alt="PCB switch placement" width="50%"><br>
+  <sub><i>PCB switch placement</i></sub>
+</p>
 
 Oh my gosh I didn't realize vertical mounting was like z-axis vertical.
 
-![Vertical resistor mounting](/images/vertical_mount.png)
+<p align="center">
+  <img src="images/vertical_mount.png" alt="Vertical resistor mounting" width="50%"><br>
+  <sub><i>Vertical resistor mounting (z-axis!)</i></sub>
+</p>
 
 That's horrible when would I need that.
 
@@ -114,30 +161,53 @@ I guess so, this OLED works with header pins with 2.54 mm spacing.
 
 Here's the updated schematic, I just need to change the resistor footprints to horizontal mounting and assign the right header pins.
 
-![Header pins](/images/updated_OLED.png)
+<p align="center">
+  <img src="images/updated_OLED.png" alt="Header pins" width="50%"><br>
+  <sub><i>Schematic with OLED header pins</i></sub>
+</p>
 
 Debating if I get surface mounted resistors and have them with the board.. Nah. These are the new footprints:
 
-![New footprints](/images/new_footprints.png)
+<p align="center">
+  <img src="images/new_footprints.png" alt="New footprints" width="50%"><br>
+  <sub><i>New footprints</i></sub>
+</p>
 
 Back to the PCB.
 
 I'm reconsidering the placement of the C3 to be -90° now that the OLED's pins are at the top. The USB would come in from the side, like this:
 
-![Side placement](/images/side_placement.png)
+<p align="center">
+  <img src="images/side_placement.png" alt="Side placement" width="50%"><br>
+  <sub><i>C3 rotated -90° so USB-C comes in from the side</i></sub>
+</p>
+
 *Except the OLED would be smaller and square shaped.
 
 I think I'll go with it.
 
 I need to make sure the OLED isn't pre-soldered. Shoot ok so all of these are presoldered. I'll need to use a female socket/header socket instead. Cool - same symbol, just changing the footprint to PinSocket. Also I'll definitely stick to a vertical orientation:
-![Vertical socket](/images/socket_orientation.png)
 
-![3d vertical socket](/images/socket_3d.png)
+<p align="center">
+  <img src="images/socket_orientation.png" alt="Vertical socket" width="50%"><br>
+  <sub><i>Vertical pin socket footprint</i></sub>
+</p>
+
+
+
+<p align="center">
+  <img src="images/socket_3d.png" alt="3d vertical socket" width="50%"><br>
+  <sub><i>Vertical socket in 3D view</i></sub>
+</p>
+
 Yeah that looks right. So do the horizontal mounted resistors.
 
 Shoot I was looking at the hackpad gallery and I kind of like the 1x 0.91" 128x32 OLED Display more. I think it works with my current set up?
 
-![PCB v1](/images/pcb1.png)
+<p align="center">
+  <img src="images/pcb1.png" alt="PCB v1" width="50%"><br>
+  <sub><i>PCB v1</i></sub>
+</p>
 
 This is what the PCB looks like, I want to prototype it in real life and measure it on my own before ordering the PCB, so I'll get the parts before.
 
@@ -150,9 +220,12 @@ Before I finalize the PCB, I want to have the physical components to play with s
 + XIAO ESP32C3
 + [Marshmallow keycap](https://www.amazon.com/gp/product/B0GXKFVZB1/ref=ox_sc_act_title_2?smid=A2N8YDAE199BID&psc=1) - technically "toasted bread"
 
-![OLED on](/images/OLEDon.png.png) 
+<p align="center">
+  <img src="images/OLEDon.png" alt="OLED on" width="50%"><br>
+  <sub><i>OLED powered on</i></sub>
+</p>
 
-# October 12: Some parts arrived (2 hours 30 minutes)
+# October 12: Some parts arrived (2 hours 30m)
 
 The self healing cutting mat (I think that's what it's called, or a cutting mat? - the mat that everyone who works in hardware/engineering has, but I got it in pink of course) and the OLED both arrived in the mail today, so I'm just waiting on the keycaps. I'm going to try to prototype the macropad with what I have so far
 
@@ -168,15 +241,28 @@ OLED: 37 x 10 mm
 C3: 20 x 15 mm
 *Need to figure out keycaps (probably ~19.05 mm)
 
-Considered a new placement ![new placement](/images/new_placement.png) with the OLED in between the keycaps, but I'll stick to the OLED on top for now.
+Considered a new placement with the OLED in between the keycaps, but I'll stick to the OLED on top for now.
 
-# October 13: Silkscreen (15 minutes)
+<p align="center">
+  <img src="images/new_placement.png" alt="OLED between keycaps placement" width="50%"><br>
+  <sub><i>Alternate placement: OLED between the keycaps</i></sub>
+</p>
+
+# October 13: Silkscreen (15m)
 Started experimenting with silkscreens but kind of forgot how to do it (it's been a while).
-![silkscreen](/images/new_silkscreen.png)
 
-# October 15: Parts Arrived (1 hour 35 minutes)
+<p align="center">
+  <img src="images/new_silkscreen.png" alt="silkscreen" width="50%"><br>
+  <sub><i>Silkscreen experiments</i></sub>
+</p>
+
+# October 15: Parts Arrived (1 hour 35m)
 I oriented the pieces how I liked and measured them
-![new placement](/images/irl_parts.png)
+
+<p align="center">
+  <img src="images/irl_parts.png" alt="new placement" width="50%"><br>
+  <sub><i>Physical parts oriented and measured</i></sub>
+</p>
 
 | Measurements | mm|
 | -- | -- |
@@ -187,8 +273,228 @@ I oriented the pieces how I liked and measured them
 Going to reorient the PCB to better fit these measurements and start researching a place to print my board.
 
 Awesome, no warnings:
-![silkscreen](/images/final_pcb.png)
+
+<p align="center">
+  <img src="images/final_pcb.png" alt="silkscreen" width="50%"><br>
+  <sub><i>Final PCB, no DRC warnings</i></sub>
+</p>
+
 And it's roughly 46 x 57 mm, I'll order it on JLCPCB even though I want to find a PCB mill/makerspace (researched but didn't find anything).
 
 JLC board dimensions: 45.87 x 57.85 mm
 It'd be cool if the board could be brown and that could be the chocolate looking piece, but I'll make it white in case the case doesn't cover parts of it so it blends in with the marshmallow keycaps.
+
+# October 28: Researching QMK Firmware
+
+<p align="center">
+  <img src="images/kmk-screenshot.png" alt="kmk screeny" width="50%"><br>
+  <sub><i>KMK firmware research</i></sub>
+</p>
+
+[OLED tutorial](https://www.youtube.com/watch?v=OJSOEStpPIo&t=213s)
+
+### rules.mk
+```
+OLED_ENABLE = yes
+LTO_ENABLE = yes
+```
+
+### keymap.c
+```
+#ifdef OLED_ENABLE
+
+bool oled_task_user() {
+    return false;
+}
+
+#endif
+```
+
+To display images:
++ bnw
++ same orientation
++ 128 x 32
++ export as jpeg
++ image to c++ (converts to byte array)
+output to plain bytes, draw mode = vertical
+
+```
+#ifdef OLED_ENABLE
+
+bool oled_task_user() {
+    static const char image [] PROGMEM = {
+
+    };
+    
+    oled_write_raw_p(image, sizeof(image));
+
+    return false;
+}
+
+#endif
+```
+
+animations
+<= 7 frames
+gif --> individual frames in easy ezgif.com
+make sure dimensions fit
+split button, output = jpeg, download zip
+same process for each image --> c++/bytecode,
+set output to arduino code
+
+<p align="center">
+  <img src="images/oled-animation.png" alt="oled animation code" width="50%"><br>
+  <sub><i>OLED animation converted to Arduino code</i></sub>
+</p>
+
+12:53 on [this tutorial](https://www.youtube.com/watch?v=hjml-K-pV4E&t=16s) for general keyboard
+
+ignore everything, qmk is not compatible with my board, so I'll use kmk instead
+
++ install circuit python
++ copy basic files from kmk
++ copy board-specific files
++ hardware may require additional libraries (copy them)
+another [helpful video](https://www.youtube.com/watch?v=Q97bFwjQ_vQ) at 5:23
+
+# October 31: Parts arrived! (2 hr)
+
+Yay PCB arrived, everything fits when I through-hole-putting-wise. I don't have 4.7k resistors but apparently I can use the 5k1 ones from my starter kit. I'll solder everything together tonight but I want to make a proper plan.
+
+Tips for 3D printing
++ Case to align the switches
++ Consider rubber feet
+<br>
+<br>
+
+<p align="center">
+  <img src="images/soldering-time.png" alt="soldering" width="50%"><br>
+  <sub><i>Soldering time</i></sub>
+</p>
+
+Following [this tutorial](), use [this website]() to create the dxf file for the plate
+
+# November 1: Soldering fixes & firmware (1 hr)
+New plan: desolder. the upper right key and solder the Xiao header pins better
+I should've checked each component works before adding all of them
+
+I kept resoldering and testing and it finally worked, this is the script I used:
+```
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 32
+#define OLED_RESET -1
+#define OLED_ADDRESS 0x3C
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+const int pins[] = {D2, D3, D7, D8};
+const char* names[] = {"SW1", "SW2", "SW3", "SW4"};
+bool last[4] = {HIGH, HIGH, HIGH, HIGH};
+unsigned long pressCount[4] = {0, 0, 0, 0};
+int lastPressed = -1;
+
+void draw() {
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+
+  // Line 1: live state of all four keys (# = held, . = up)
+  display.setCursor(0, 0);
+  display.print("Keys: ");
+  for (int i = 0; i < 4; i++) {
+    display.print(last[i] == LOW ? "# " : ". ");
+  }
+
+  // Line 2: last key pressed
+  display.setCursor(0, 12);
+  if (lastPressed >= 0) {
+    display.print("Last: ");
+    display.print(names[lastPressed]);
+  } else {
+    display.print("Press a key...");
+  }
+
+  // Line 3: press counts
+  display.setCursor(0, 24);
+  for (int i = 0; i < 4; i++) {
+    display.print(pressCount[i]);
+    display.print(" ");
+  }
+  display.display();
+}
+
+void setup() {
+  Serial.begin(115200);
+  delay(2000);
+
+  for (int i = 0; i < 4; i++) pinMode(pins[i], INPUT_PULLUP);
+
+  // Swapped pins: SDA = GPIO7, SCL = GPIO6
+  Wire.begin(7, 6);
+
+  if (!display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDRESS)) {
+    Serial.println("OLED not detected or initialization failed!");
+    while (true) delay(1000);
+  }
+
+  Serial.println("Ready. Press keys.");
+  draw();
+}
+
+void loop() {
+  bool changed = false;
+  for (int i = 0; i < 4; i++) {
+    bool now = digitalRead(pins[i]);
+    if (now != last[i]) {
+      delay(10);                       // simple debounce
+      now = digitalRead(pins[i]);
+      if (now != last[i]) {
+        last[i] = now;
+        changed = true;
+        if (now == LOW) {
+          pressCount[i]++;
+          lastPressed = i;
+          Serial.printf("%s PRESSED\n", names[i]);
+        } else {
+          Serial.printf("%s released\n", names[i]);
+        }
+      }
+    }
+  }
+  if (changed) draw();
+}
+```
+
+Only burnt myself once. Also it doesn't look as pretty as I want as the keys aren't oriented completely straight and the flux didn't clean off nicely. I learned so much for next time though.
+
+Omg she works, I'm so hapy.
+
+I'll use the macropad for simple shortcuts for now:
+SW1: copy, SW3:paste
+SW2: open new window, close window
+
+Using [this library](https://github.com/T-vK/ESP32-BLE-Keyboard) for the firmware.
+
+SW1 = Cmd + option + left arrow key
+SW3 = Cmd + option + right arrow key
+
+SW2 = Cmd + L
+SW4 = open terminal at that folder
+
+Change the mapping, currently: SW2 and SW3 should be swapped
+
+Open terminal at folder command: acts on the folder selected in Finder. Opening the terminal at the Finder window’s current folder with nothing selected has no built-in shortcut, though a small Shortcuts or AppleScript action can do it if that’s what you meant.
+
+Here's the [finished code](/Code/FinalizedMacropad.cpp).
+
+I'm so happy she's finally done
+
+<p align="center">
+  <img src="images/finished.png" alt="finished" width="50%"><br>
+  <sub><i>The finished S'mores Pad</i></sub>
+</p>
+
