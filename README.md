@@ -54,9 +54,9 @@ Bluetooth (BLE) keyboard firmware written in Arduino C++, using the [ESP32-BLE-K
 | SW3 | Next tab (Cmd + Option + Right)     |
 | SW4 | New Terminal at Folder              |
 
-+ [FinalizedMacropad.cpp](Code/FinalizedMacropad.cpp): the finished firmware
-+ [KeySwitchTest.cpp](Code/KeySwitchTest.cpp): test sketch that shows key presses on the OLED
-+ [TestingOLED.cpp](Code/TestingOLED.cpp): first OLED test
-+ [QMK/](Code/QMK): early QMK snippets (not used, since QMK doesn't support the ESP32-C3)
++ [FinalizedMacropad.cpp](code/FinalizedMacropad.cpp): the finished firmware
++ [KeySwitchTest.cpp](code/KeySwitchTest.cpp): test sketch that shows key presses on the OLED
++ [TestingOLED.cpp](code/TestingOLED.cpp): first OLED test
++ [QMK/](code/QMK): early QMK snippets (not used, since QMK doesn't support the ESP32-C3)
 
 Check out this [video demo](https://youtube.com/shorts/Tp6h0N3CoMg)

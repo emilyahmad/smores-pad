@@ -235,7 +235,7 @@ Ok I just wired it up to the XIAO, apparently there's no indicator if the OLED i
 
 Using the instructions from an [old project](https://github.com/emilyahmad/pear-phone/blob/main/journals/JOURNAL_2.md) to get the C3 board running with Arduino IDE.
 
-Also installed Adafruit SSD1306 and Adafruit GFX libraries. Code didn't work, I'll try SCK to D5 instead. Worked when I ran the [following](/Code/TestingOLED.cpp). Now I'll measure it and figure out how I want the spacing, I got:
+Also installed Adafruit SSD1306 and Adafruit GFX libraries. Code didn't work, I'll try SCK to D5 instead. Worked when I ran the [following](/code/TestingOLED.cpp). Now I'll measure it and figure out how I want the spacing, I got:
 
 OLED: 37 x 10 mm
 C3: 20 x 15 mm
@@ -284,7 +284,7 @@ And it's roughly 46 x 57 mm, I'll order it on JLCPCB even though I want to find 
 JLC board dimensions: 45.87 x 57.85 mm
 It'd be cool if the board could be brown and that could be the chocolate looking piece, but I'll make it white in case the case doesn't cover parts of it so it blends in with the marshmallow keycaps.
 
-# October 28: Researching QMK Firmware
+# October 28: Researching QMK Firmware (30m)
 
 <p align="center">
   <img src="images/kmk-screenshot.png" alt="kmk screeny" width="50%"><br>
@@ -489,7 +489,7 @@ Change the mapping, currently: SW2 and SW3 should be swapped
 
 Open terminal at folder command: acts on the folder selected in Finder. Opening the terminal at the Finder window’s current folder with nothing selected has no built-in shortcut, though a small Shortcuts or AppleScript action can do it if that’s what you meant.
 
-Here's the [finished code](/Code/FinalizedMacropad.cpp).
+Here's the [finished code](/code/FinalizedMacropad.cpp).
 
 I'm so happy she's finally done
 
