@@ -1,10 +1,3 @@
----
-title: "S'mores Pad"
-author: "Emily Ahmad"
-description: "A s'mores themed macropad, with 4 keys and an OLED powered by a XIAO ESP32-C3"
-created_at: "2026-10-10"
----
-
 # October 7: Designign in Figma, determining component placement (3 hours)
 
 I was working on this macropad as my first hardware project for Stasis back in April I think, but the guide was really hard for me to follow, so I finished making the PCB and tried to submit the project without any CAD or firmware (not cooking).
