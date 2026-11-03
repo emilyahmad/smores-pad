@@ -12,7 +12,7 @@ I was working on this macropad as my first hardware project for Stasis back in A
 A few months ago I saw a really cute video of these girls with keychains that had keycaps of toasted bread, but they kind of looked like slightly burnt marshmallows to me, which gave me the idea to make a really cute s'mores themed macropad for end of summer/beginning of fall. I feel like the s'mores components will actually fit well into the design, as you can see below:
 
 <p align="center">
-  <img src="images/prototype1.png" alt="Little sketch" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/prototype1.png" alt="Little sketch" width="50%"><br>
   <sub><i>First sketch of the s'mores layout</i></sub>
 </p>
 
@@ -21,7 +21,7 @@ I might just make the PCB from scratch for practice and I want to adjust it to a
 Shoot I'm actually reconsidering this looking at my old design. It wouldn't be that hard to add a rotary or an OLED and that would make it much more useful. Back to the drawing board?
 
 <p align="center">
-  <img src="images/prototype2.png" alt="Another sketch" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/prototype2.png" alt="Another sketch" width="50%"><br>
   <sub><i>Second sketch with an OLED</i></sub>
 </p>
 
@@ -38,14 +38,14 @@ Correspond to different power rails, we won't use VUSB (5V)
 Yes
 
 <p align="center">
-  <img src="images/smorespad_general_wiring.png" alt="General placement" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/smorespad_general_wiring.png" alt="General placement" width="50%"><br>
   <sub><i>General component placement</i></sub>
 </p>
 
 I'm planning to wire it like this.
 
 <p align="center">
-  <img src="images/smorespad_schematic.png" alt="Schematic" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/smorespad_schematic.png" alt="Schematic" width="50%"><br>
   <sub><i>First schematic</i></sub>
 </p>
 
@@ -55,7 +55,7 @@ This is what I've got, I'll double check with Claude. Claude mentioned:
 Because adding an additional 4.7 Ω resistor won't damage or make it slower, I'll add it between the SDA and SCL pins connecting to the OLED.
 
 <p align="center">
-  <img src="images/added_resistors.png" alt="Added resistors" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/added_resistors.png" alt="Added resistors" width="50%"><br>
   <sub><i>Added pull-up resistors</i></sub>
 </p>
 
@@ -70,7 +70,7 @@ I might need to add a USB-Receptable part of the wiring like my devboard. I won'
 Oh it's mainly for power outputs? Ohh I think I get it, you just put the power flag between the 3.3V or GND/whatever power symbol, just like you would with a resistor - on the net.
 
 <p align="center">
-  <img src="images/place_pwr_flag.png" alt="Pwr flag placed right" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/place_pwr_flag.png" alt="Pwr flag placed right" width="50%"><br>
   <sub><i>PWR_FLAG placed correctly</i></sub>
 </p>
 
@@ -90,14 +90,14 @@ Max body diameter: 2.5mm
 So I'll look for a footprint similar to L6mm_D2.5mm
 
 <p align="center">
-  <img src="images/resistor_visual.png" alt="Resistor visual" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/resistor_visual.png" alt="Resistor visual" width="50%"><br>
   <sub><i>Resistor visual</i></sub>
 </p>
 
 and place it vertically to better fit the board. Next time I might just surface mount & PCBA it. When it arrives I have to mesaure the body and make sure its body is within .5 mm and choose Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P2.54mm_Vertical
 
 <p align="center">
-  <img src="images/footprints_assigned.png" alt="Resistor visual" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/footprints_assigned.png" alt="Resistor visual" width="50%"><br>
   <sub><i>Footprints assigned</i></sub>
 </p>
 
@@ -107,14 +107,14 @@ Figure this out when the parts arrive/designing firmware.
 Let's gooo - no more errors. I was having a "current configuration does not include footprint library" error but I just re-assigned the footprint and it worked. Here's the wiring:
 
 <p align="center">
-  <img src="images/smorespad_schematic2.png" alt="Schematic 2" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/smorespad_schematic2.png" alt="Schematic 2" width="50%"><br>
   <sub><i>Schematic v2</i></sub>
 </p>
 
 Let's check again with Claude then PCB time. Oh I did the pull ups on the resistors wrong. I'm going to re-orgnize the whole schematic based on the components and use labels for the digital pins. SDA and SCL should be bidirectional shaped labels, MCU digital pins are input shaped and those coming out of the other components are outputs.
 
 <p align="center">
-  <img src="images/smorespad_schematic3.png" alt="Schematic 3" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/smorespad_schematic3.png" alt="Schematic 3" width="50%"><br>
   <sub><i>Schematic v3</i></sub>
 </p>
 
@@ -134,21 +134,21 @@ Placing the switches/keys is so frustrating. I saw a youtube comment saying to u
 New plan because the OLED is lowkey huge: put the C3 behind the OLED so the USB-C still sticks out, but the new design will look more like this:
 
 <p align="center">
-  <img src="images/general_placement2.png" alt="New placement" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/general_placement2.png" alt="New placement" width="50%"><br>
   <sub><i>New placement with the C3 behind the OLED</i></sub>
 </p>
 
 I'm planning to add ~ 1.5mm spacing between each component. Never mind, that looks huge in the 3D viewer. Oh but that's the indivudal switches, there's going to need to be space for the keycaps. I'll just keep them bordering each other, so no overlap.
 
 <p align="center">
-  <img src="images/pcb_switch_placement.png" alt="PCB switch placement" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/pcb_switch_placement.png" alt="PCB switch placement" width="50%"><br>
   <sub><i>PCB switch placement</i></sub>
 </p>
 
 Oh my gosh I didn't realize vertical mounting was like z-axis vertical.
 
 <p align="center">
-  <img src="images/vertical_mount.png" alt="Vertical resistor mounting" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/vertical_mount.png" alt="Vertical resistor mounting" width="50%"><br>
   <sub><i>Vertical resistor mounting (z-axis!)</i></sub>
 </p>
 
@@ -162,14 +162,14 @@ I guess so, this OLED works with header pins with 2.54 mm spacing.
 Here's the updated schematic, I just need to change the resistor footprints to horizontal mounting and assign the right header pins.
 
 <p align="center">
-  <img src="images/updated_OLED.png" alt="Header pins" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/updated_OLED.png" alt="Header pins" width="50%"><br>
   <sub><i>Schematic with OLED header pins</i></sub>
 </p>
 
 Debating if I get surface mounted resistors and have them with the board.. Nah. These are the new footprints:
 
 <p align="center">
-  <img src="images/new_footprints.png" alt="New footprints" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/new_footprints.png" alt="New footprints" width="50%"><br>
   <sub><i>New footprints</i></sub>
 </p>
 
@@ -178,7 +178,7 @@ Back to the PCB.
 I'm reconsidering the placement of the C3 to be -90° now that the OLED's pins are at the top. The USB would come in from the side, like this:
 
 <p align="center">
-  <img src="images/side_placement.png" alt="Side placement" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/side_placement.png" alt="Side placement" width="50%"><br>
   <sub><i>C3 rotated -90° so USB-C comes in from the side</i></sub>
 </p>
 
@@ -189,14 +189,14 @@ I think I'll go with it.
 I need to make sure the OLED isn't pre-soldered. Shoot ok so all of these are presoldered. I'll need to use a female socket/header socket instead. Cool - same symbol, just changing the footprint to PinSocket. Also I'll definitely stick to a vertical orientation:
 
 <p align="center">
-  <img src="images/socket_orientation.png" alt="Vertical socket" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/socket_orientation.png" alt="Vertical socket" width="50%"><br>
   <sub><i>Vertical pin socket footprint</i></sub>
 </p>
 
 
 
 <p align="center">
-  <img src="images/socket_3d.png" alt="3d vertical socket" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/socket_3d.png" alt="3d vertical socket" width="50%"><br>
   <sub><i>Vertical socket in 3D view</i></sub>
 </p>
 
@@ -205,7 +205,7 @@ Yeah that looks right. So do the horizontal mounted resistors.
 Shoot I was looking at the hackpad gallery and I kind of like the 1x 0.91" 128x32 OLED Display more. I think it works with my current set up?
 
 <p align="center">
-  <img src="images/pcb1.png" alt="PCB v1" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/pcb1.png" alt="PCB v1" width="50%"><br>
   <sub><i>PCB v1</i></sub>
 </p>
 
@@ -221,7 +221,7 @@ Before I finalize the PCB, I want to have the physical components to play with s
 + [Marshmallow keycap](https://www.amazon.com/gp/product/B0GXKFVZB1/ref=ox_sc_act_title_2?smid=A2N8YDAE199BID&psc=1) - technically "toasted bread"
 
 <p align="center">
-  <img src="images/OLEDon.png" alt="OLED on" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/OLEDon.png" alt="OLED on" width="50%"><br>
   <sub><i>OLED powered on</i></sub>
 </p>
 
@@ -235,7 +235,7 @@ Ok I just wired it up to the XIAO, apparently there's no indicator if the OLED i
 
 Using the instructions from an [old project](https://github.com/emilyahmad/pear-phone/blob/main/journals/JOURNAL_2.md) to get the C3 board running with Arduino IDE.
 
-Also installed Adafruit SSD1306 and Adafruit GFX libraries. Code didn't work, I'll try SCK to D5 instead. Worked when I ran the [following](/code/TestingOLED.cpp). Now I'll measure it and figure out how I want the spacing, I got:
+Also installed Adafruit SSD1306 and Adafruit GFX libraries. Code didn't work, I'll try SCK to D5 instead. Worked when I ran the [following](https://github.com/emilyahmad/smores-pad/blob/main/code/TestingOLED.cpp). Now I'll measure it and figure out how I want the spacing, I got:
 
 OLED: 37 x 10 mm
 C3: 20 x 15 mm
@@ -244,7 +244,7 @@ C3: 20 x 15 mm
 Considered a new placement with the OLED in between the keycaps, but I'll stick to the OLED on top for now.
 
 <p align="center">
-  <img src="images/new_placement.png" alt="OLED between keycaps placement" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/new_placement.png" alt="OLED between keycaps placement" width="50%"><br>
   <sub><i>Alternate placement: OLED between the keycaps</i></sub>
 </p>
 
@@ -252,7 +252,7 @@ Considered a new placement with the OLED in between the keycaps, but I'll stick 
 Started experimenting with silkscreens but kind of forgot how to do it (it's been a while).
 
 <p align="center">
-  <img src="images/new_silkscreen.png" alt="silkscreen" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/new_silkscreen.png" alt="silkscreen" width="50%"><br>
   <sub><i>Silkscreen experiments</i></sub>
 </p>
 
@@ -260,7 +260,7 @@ Started experimenting with silkscreens but kind of forgot how to do it (it's bee
 I oriented the pieces how I liked and measured them
 
 <p align="center">
-  <img src="images/irl_parts.png" alt="new placement" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/irl_parts.png" alt="new placement" width="50%"><br>
   <sub><i>Physical parts oriented and measured</i></sub>
 </p>
 
@@ -275,7 +275,7 @@ Going to reorient the PCB to better fit these measurements and start researching
 Awesome, no warnings:
 
 <p align="center">
-  <img src="images/final_pcb.png" alt="silkscreen" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/final_pcb.png" alt="silkscreen" width="50%"><br>
   <sub><i>Final PCB, no DRC warnings</i></sub>
 </p>
 
@@ -287,7 +287,7 @@ It'd be cool if the board could be brown and that could be the chocolate looking
 # October 28: Researching QMK Firmware (30m)
 
 <p align="center">
-  <img src="images/kmk-screenshot.png" alt="kmk screeny" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/kmk-screenshot.png" alt="kmk screeny" width="50%"><br>
   <sub><i>KMK firmware research</i></sub>
 </p>
 
@@ -343,7 +343,7 @@ same process for each image --> c++/bytecode,
 set output to arduino code
 
 <p align="center">
-  <img src="images/oled-animation.png" alt="oled animation code" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/oled-animation.png" alt="oled animation code" width="50%"><br>
   <sub><i>OLED animation converted to Arduino code</i></sub>
 </p>
 
@@ -368,7 +368,7 @@ Tips for 3D printing
 <br>
 
 <p align="center">
-  <img src="images/soldering-time.png" alt="soldering" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/soldering-time.png" alt="soldering" width="50%"><br>
   <sub><i>Soldering time</i></sub>
 </p>
 
@@ -489,12 +489,12 @@ Change the mapping, currently: SW2 and SW3 should be swapped
 
 Open terminal at folder command: acts on the folder selected in Finder. Opening the terminal at the Finder window’s current folder with nothing selected has no built-in shortcut, though a small Shortcuts or AppleScript action can do it if that’s what you meant.
 
-Here's the [finished code](/code/FinalizedMacropad.cpp).
+Here's the [finished code](https://github.com/emilyahmad/smores-pad/blob/main/code/FinalizedMacropad.cpp).
 
 I'm so happy she's finally done
 
 <p align="center">
-  <img src="images/finished.png" alt="finished" width="50%"><br>
+  <img src="https://raw.githubusercontent.com/emilyahmad/smores-pad/main/images/finished.png" alt="finished" width="50%"><br>
   <sub><i>The finished S'mores Pad</i></sub>
 </p>
 
